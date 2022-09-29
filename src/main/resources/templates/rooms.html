@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<h1>Cluedo</h1>
+
+
+<h2>Rooms</h2>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <td>
+            Name
+        </td>
+        <td>
+            position
+        </td>
+        <td>
+            groesse
+        </td>
+        <td>
+            merkmal
+        </td>
+    </tr>
+    </thead>
+    <tr th:each="room : ${rooms}">
+        <td th:text="${room.getName}"></td>
+        <td th:text="${room.getPosition}"></td>
+        <td th:text="${room.getGroesse}"></td>
+        <td th:text="${room.getMerkmal}"></td>
+    </tr>
+</table>
+</body>
+</html>
