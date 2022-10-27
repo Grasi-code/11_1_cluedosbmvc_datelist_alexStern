@@ -15,5 +15,35 @@ public class Crime{
 
    private List<String> history = new ArrayList<>();
 
-   // to be done... Getter, Setter and more
+   public int getActor() {
+      return actor;
+   }
+
+   public void setActor(int actor) {
+      this.actor = actor;
+   }
+
+   public int getWeapon() {
+      return weapon;
+   }
+
+   public void setWeapon(int weapon) {
+      this.weapon = weapon;
+   }
+
+   public int getScene() {
+      return scene;
+   }
+
+   public void setScene(int scene) {
+      this.scene = scene;
+   }
+
+   public List<String> getHistory() {
+      return history;
+   }
+
+   public void setHistory(List<String> history) {
+      this.history = history;
+   }
 }
