@@ -1,5 +1,9 @@
 $( document ).ready(function() {
     $( "#submitButton" ).click(function() {
-        console.log("heydfsf")
+        let person = $("#person").val();
+        let weapon = $("#weapon").val()
+        let room = $("#rooms").val()
+
+        $.post("/submit")
     });
 });
