@@ -1,12 +1,16 @@
 package com.example._11_1_cluedosbmvc_datelist.controllers;
 
+import com.example._11_1_cluedosbmvc_datelist.logic.GameLogic;
 import com.example._11_1_cluedosbmvc_datelist.models.DataService;
+import com.example._11_1_cluedosbmvc_datelist.models.classes.Crime;
 import com.example._11_1_cluedosbmvc_datelist.models.classes.Person;
 import com.example._11_1_cluedosbmvc_datelist.models.classes.Rooms;
 import com.example._11_1_cluedosbmvc_datelist.models.classes.Weapon;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -14,8 +18,9 @@ import java.util.List;
 public class ViewController {
     Boolean isLoaded = false;
     DataService dataService = new DataService();
+    GameLogic gameLogic = new GameLogic();
 
-    Person chad = new Person("Chad", "giga", 24, "Musklen", "chad",false);
+    Person chad = new Person("Chad", "giga", 24, "Musklen", "chad", false);
     Person soyBoy = new Person("Jeffery", "Mr", 44, "Glatze", "Detailhandel", false);
     Person geeler = new Person("Geeler", "Mr", 17, "Coding Sweater", "informatiker", false);
     Person lauper = new Person("Lauper", "Mr", 17, "Nicht sportlich", "Informatiker", false);
@@ -90,6 +95,7 @@ public class ViewController {
 
     @GetMapping("/")
     public String homeForm(Model model) {
+
         deletePeople(dataService.getPeople());
         setupPeople(dataService.getPeople());
         model.addAttribute("people", dataService.getPeople());
@@ -99,6 +105,24 @@ public class ViewController {
         deleteRooms(dataService.getRooms());
         setupRooms(dataService.getRooms());
         model.addAttribute("rooms", dataService.getRooms());
+
+
+
         return "index";
     }
-}
+
+    @PostMapping("/submit")
+    public String CheckCrime(@RequestParam Person person, @RequestParam Rooms room, @ RequestParam Weapon weapon) {
+        Crime crime = new Crime();
+        int MaxSuggestion = 5;
+        int currenSuggestion = 0;
+        Crime playersCrime = new Crime();
+
+        playersCrime.setActor(dataService.findPersonIndexByName(dataService.getPeople(), person.getName()));
+        playersCrime.setWeapon(dataService.findWeaponIndexByName(dataService.getWeapons(), weapon.getName()));
+        playersCrime.setScene(dataService.findRoomIndexByName(dataService.getRooms(), room.getName()));
+        gameLogic.setupNewGame(dataService, crime);
+        gameLogic.evaluateSuggestion(playersCrime, crime, currenSuggestion, MaxSuggestion);
+        return "";
+    }
+    }

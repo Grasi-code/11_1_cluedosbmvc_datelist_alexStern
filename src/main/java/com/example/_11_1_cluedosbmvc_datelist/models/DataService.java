@@ -5,6 +5,7 @@ import com.example._11_1_cluedosbmvc_datelist.models.classes.Rooms;
 import com.example._11_1_cluedosbmvc_datelist.models.classes.Weapon;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DataService {
@@ -12,6 +13,37 @@ public class DataService {
     private List<Weapon> weapons = new ArrayList<>();
     private List<Rooms> rooms = new ArrayList<>();
     private List<String> history;
+
+    public int findPersonIndexByName(List<Person> people, String name){
+        if(Arrays.asList(people).contains(name)){
+            int index = Arrays.asList(people).indexOf(name);
+            return index;
+        } else{
+            return 0;
+        }
+    }
+
+    public int findWeaponIndexByName(List<Weapon> weapon, String name){
+        if(Arrays.asList(weapon).contains(name)){
+            int index = Arrays.asList(weapon).indexOf(name);
+            return index;
+        } else{
+            return 0;
+        }
+    }
+
+    public int findRoomIndexByName(List<Rooms> rooms, String name){
+        if(Arrays.asList(rooms).contains(name)){
+            int index = Arrays.asList(rooms).indexOf(name);
+            return index;
+        } else{
+            return 0;
+        }
+    }
+
+    public void addPerson(Person person){
+        people.add(person);
+    }
 
     public List<Person> getPeople() {
         return people;
